@@ -1,0 +1,230 @@
+<mvc:View controllerName="NT.zprojectodatae0703.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    height="100%">
+
+
+    <ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false" useIconTabBar="true">
+        <headerTitle>
+            <ObjectPageHeader objectTitle="Section sample">
+                <actions>
+                    <ObjectPageHeaderActionButton
+                        icon="sap-icon://search"
+                        text="Search"
+                        hideText="false"
+                        press="onSearch"
+                        type="Emphasized" />
+                </actions>
+            </ObjectPageHeader>
+        </headerTitle>
+
+        <headerContent>
+            <m:ObjectAttribute title=""
+                text="This example explains the rules for the rendering of sections" />
+            <l:Grid containerQuery="true"
+                defaultSpan="XL2 L4 M6 S12">
+                <m:VBox>
+                    <m:Label text="OrderID" />
+                    <m:Input id="idOrderID" />
+                    <!-- type="Number"
+                        valueState="Error"
+                        valueStateText="Error Message !!" /> -->
+                </m:VBox>
+
+                <m:VBox>
+                    <m:Label text="Order Date" />
+                    <m:DatePicker
+                        displayFormat="yyyy-MM-dd"
+                        id="idOrderDate"
+                        valueFormat="yyyyMMdd">
+                    </m:DatePicker>
+                </m:VBox>
+
+                <m:VBox>
+                    <m:Label text="Label3" />
+                    <m:Input />
+                </m:VBox>
+
+                <m:VBox>
+                    <m:Label text="Label4" />
+                    <m:Input />
+                </m:VBox>
+
+                <m:VBox>
+                    <m:Label text="Label5" />
+                    <m:Input />
+                </m:VBox>
+
+            </l:Grid>
+        </headerContent>
+
+        <sections>
+
+            <ObjectPageSection titleUppercase="false" title="Section 3">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <m:Table id="idProductsTable"
+                                inset="false"
+                                items="{/Orders}">
+                                <!-- path : '/Products',
+                                        filters : [{
+                                            path : 'UnitsOnOrder',
+                                            operator : 'NE',
+                                            value1 : '0'
+                                        },{
+                                            path : 'ProductName',
+                                            operator : 'Contains',
+                                            value1 : 'C'    
+                                        }],
+                                        sorter : [{
+                                            path : 'UnitsInStock',
+                                            decending : true
+                                        },
+                                        {
+                                            path : 'UnitsOnOrder',
+                                            decending : false
+                                        }] -->
+
+                                <m:headerToolbar>
+                                    <m:OverflowToolbar>
+                                        <m:content>
+                                            <m:Title text="Products" level="H2" />
+                                            <m:ToolbarSpacer />
+
+                                        </m:content>
+                                    </m:OverflowToolbar>
+                                </m:headerToolbar>
+
+
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Text text="Order ID" />
+                                    </m:Column>
+
+                                    <m:Column>
+                                        <m:Text text="Customer ID" />
+                                    </m:Column>
+
+                                    <m:Column>
+                                        <m:Text text="Order Date" />
+                                    </m:Column>
+
+                                    <m:Column>
+                                        <m:Text text="Required Date" />
+                                    </m:Column>
+
+                                    <m:Column>
+                                        <m:Text text="Shipped Date" />
+                                    </m:Column>
+
+
+                                    <!-- <m:Column>
+                                            <m:Text text="Product Name" />
+                                        </m:Column>
+
+                                        <m:Column>
+                                            <m:Text text="Units In Stock" />
+                                        </m:Column>
+
+                                        <m:Column>
+                                            <m:Text text="Units On Order" />
+                                        </m:Column> -->
+
+                                    <!-- <m:Column>
+                                            <m:Text text="Custom Sum" />
+                                        </m:Column>
+
+                                         <m:Column>
+                                            <m:Text text="Result" />
+                                        </m:Column>   <m:Column>
+                                            <m:Text text="Product Name" />
+                                        </m:Column>
+
+                                        <m:Column>
+                                            <m:Text text="Units In Stock" />
+                                        </m:Column>
+
+                                        <m:Column>
+                                            <m:Text text="Units On Order" />
+                                        </m:Column>
+                                         -->
+                                    <!-- <m:Column>
+                                            <m:Text text="Custom Sum" />
+                                        </m:Column>
+
+                                         <m:Column>
+                                            <m:Text text="Result" />
+                                        </m:Column>-->
+                                </m:columns>
+
+                                <m:items>
+                                    <m:ColumnListItem vAlign="Middle">
+                                        <m:cells>
+
+                                            <m:ObjectIdentifier title="{OrderID}" />
+                                            <m:Text text="{CustomerID}" />
+                                            <m:Text
+                                                text="{
+                                                    path : 'OrderDate',
+                                                    formatter : '.formatter.dateTime'
+                                                    }" />
+                                            <m:Text
+                                                text="{
+                                                    path : 'RequiredDate',
+                                                    formatter : '.formatter.dateTime'
+                                                    }" />
+                                            <m:Text
+                                                text="{
+                                                    path : 'ShippedDate',
+                                                    formatter : '.formatter.dateTime'
+                                                    }" />
+
+                                            <!-- <m:ObjectIdentifier title="{ProductName}" /> 
+                                                <m:Text text="{UnitsInStock}" /> 
+                                                <m:Text text="{UnitsOnOrder}" />  -->
+                                            <!-- <m:Text text="{
+                                                    parts : [
+                                                    {path : 'UnitsInStock' },
+                                                    {path : 'UnitsOnOrder' } 
+                                                    ],
+                                                    formatter : '.formatter.onSum'
+                                                }"/> -->
+
+                                            <!-- <m:Text text= "{UnitsInStock} and {UnitsOnOrder}"/>
+
+                                                <core:Icon src="sap-icon://circle-task-2" color="{= (${UnitsInStock} + ${UnitsOnOrder}) &lt; 50 ?
+                                            '#1DDB16': '#FF0000'}"/> -->
+                                            <!-- <m:Text text="{= ${UnitsInStock} + ${UnitsOnOrder}
+                                            }" 
+                                                        visible="{= (${UnitsInStock} + ${UnitsOnOrder}) &lt; 50 ? false : true}"/>   -->
+
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" title="Section 3">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <m:Text text="test" />
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+        </sections>
+
+    </ObjectPageLayout>
+</mvc:View>

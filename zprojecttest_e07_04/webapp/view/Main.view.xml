@@ -1,0 +1,113 @@
+<mvc:View controllerName="zprojectteste0704.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns="sap.m">
+    <Page id="page" title="{MainModel>/title/subTitle}">
+        <content>
+            <Button text="change" press="onChange" />
+            <Button text="display" press="onDisplay" />
+            <Text id="idText" text="{MainModel>/list/0/name}"/>
+
+         <l:VerticalLayout>
+          <l:content>
+		   <Input id="idInput1"/>
+             <Select width="100%" id="idSelect" >
+              <items>
+               <core:Item key="plus" text="+" />
+               <core:Item key="minus" text="-" />
+               <core:Item key="multiply" text="*" />
+               <core:Item key="divide" text="/" />
+              </items>
+             </Select>
+          <Input id="idInput2"/>
+            <Button type="Emphasized" text="Button text" width="100%" press="onButtonPress"></Button>
+		    
+         </l:content>
+        </l:VerticalLayout>
+
+            <t:Table
+				rows="{MainModel>/list}"
+				selectionMode="MultiToggle"
+				visibleRowCount="7"
+				paste="onPaste"
+				ariaLabelledBy="title">
+				<t:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="Calculation"/>
+						<!-- <ToolbarSpacer /> 
+						<Button text="Add" press="onAdd" icon="sap-icon://add"/>
+						<Button text="Delete" press="onDelete" icon="sap-icon://delete"/> -->
+					</OverflowToolbar>
+				</t:extension>
+				<t:columns>
+					<t:Column>
+						<Label text="Num1" />
+						<t:template>
+							<Text text="{MainModel>num1}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+                    <t:Column>
+						<Label text="Operator" />
+						<t:template>
+							<Text text="{MainModel>oper}" wrapping="false" />
+						</t:template>
+					</t:Column>
+                    
+                    <t:Column>
+						<Label text="Num2" />
+						<t:template>
+							<Text text="{MainModel>num2}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+                    <t:Column>
+						<Label text="Result" />
+						<t:template>
+							<Text text="{MainModel>result}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					
+				</t:columns>
+			</t:Table>
+
+		 <t:Table id="todoTable"
+		 		rowActionCount="1"
+				rows="{MainModel>/todo}"
+				selectionMode="MultiToggle"
+				visibleRowCount="7"
+				paste="onPaste"
+				ariaLabelledBy="title">
+				<t:extension>
+					<OverflowToolbar style="Clear">
+						<Title text="Todo List"/>
+						<ToolbarSpacer /> 
+						<Button text="Add" press="onAdd" icon="sap-icon://add"/>
+						<Button text="Delete" press="onDelete" icon="sap-icon://delete"/>
+					</OverflowToolbar>
+				</t:extension>
+				<t:columns>
+					<t:Column>
+						<Label text="Content" />
+						<t:template>
+							<Text text="{MainModel>content}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					
+				</t:columns>
+				
+				<t:rowActionTemplate>
+					<t:RowAction >
+						<t:items>
+							<t:RowActionItem type="Delete" press="onRowDelete" icon="sap-icon://decline"/>
+						</t:items>
+					</t:RowAction>
+				</t:rowActionTemplate>
+			
+			</t:Table>
+		
+        </content>
+    </Page>
+</mvc:View>

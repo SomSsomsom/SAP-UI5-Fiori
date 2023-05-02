@@ -1,0 +1,124 @@
+<mvc:View
+    controllerName="zprojectodatae0704.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    height="100%">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}"
+        toggleHeaderOnTitleClick="{/titleClickable}">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Header Title" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <layout:HorizontalLayout allowWrapping="true">
+                    <layout:VerticalLayout class="sapUiMediumMarginEnd">
+                        <Input showValueHelp="true" valueHelpRequest="onValueHelpRequest"
+                            id="idInput1" />
+                    </layout:VerticalLayout>
+
+                    <layout:VerticalLayout>
+                        <ObjectAttribute title="Availability" />
+                        <ObjectStatus text="In Stock" state="Success" />
+                    </layout:VerticalLayout>
+                </layout:HorizontalLayout>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table id="idCustomerTable"
+                sticky="HeaderToolbar,ColumnHeaders"
+                inset="false"
+                items="{/Orders}"
+                class="sapFDynamicPageAlignContent"
+                width="auto"
+                mode="SingleSelectMaster"
+                selectionChange="onChange"
+            >
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Orders" level="H2" />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column
+                        width="12em">
+                        <Text text="Order ID" />
+                    </Column>
+
+                    <Column
+                        width="12em">
+                        <Text text="Customer ID" />
+                    </Column>
+
+                    <Column
+                        width="12em">
+                        <Text text="Emplyee ID" />
+                    </Column>
+
+                    <Column
+                        width="12em">
+                        <Text text="Order Date" />
+                    </Column>
+
+                    <Column
+                        width="12em">
+                        <Text text="Required Date" />
+                    </Column>
+
+                    <Column
+                        width="12em">
+                        <Text text="Shipped Date" />
+                    </Column>
+
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier
+                                title="{OrderID}" />
+                            <Text text="{CustomerID}" />
+                            <Text text="{EmployeeID}" />
+                            <Text
+                                text="{
+                                path: 'OrderDate',
+                                formatter : '.formatter.dateTime'
+                                }" />
+                            <Text
+                                text="{
+                                path: 'RequiredDate',
+                                formatter : '.formatter.dateTime'
+                                }" />
+                            <Text
+                                text="{
+                                path: 'ShippedDate',
+                                formatter : '.formatter.dateTime'
+                                 }" />
+
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+                <Button icon="sap-icon://message-popup"
+                    text="{/messagesLength}"
+                    type="Emphasized"
+                    press="onMessageButtonPress"
+                    visible="{= !!${/messagesLength}}" />
+                <ToolbarSpacer />
+                <Button type="Accept" text="Accept" />
+                <Button type="Reject" text="Reject" />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,57 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:m="sap.m"
+>
+    <m:Dialog id="addDialog" title="Customers" beforeOpen="onBeforeOpen" draggable="true"
+        resizable="true">
+        <m:content>
+            <!-- <HBox height="60px"
+                alignItems="Center"
+                justifyContent="Center">
+                <Label text="Content" class="sapUiSmallMarginEnd" />
+                <Input value="{root>/value}" id="addInput" />
+            </HBox> -->
+
+            <Table
+                rows="{/Customers}"
+                selectionMode="Single"
+                visibleRowCount="7"
+                paste="onPaste"
+                ariaLabelledBy="title"
+                rowSelectionChange="onSelectChange"
+                id="idTable">
+                <extension>
+                    <m:OverflowToolbar style="Clear">
+                        <m:Title id="title" text="Customers" />
+                    </m:OverflowToolbar>
+                </extension>
+
+                <columns>
+                    <Column>
+                        <m:Label text="Customer ID" />
+                        <template>
+                            <m:Text text="{CustomerID}" wrapping="false" />
+                        </template>
+                    </Column>
+                    <Column>
+                        <m:Label text="Company Name" />
+                        <template>
+                            <m:Text text="{CompanyName}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                </columns>
+            </Table>
+
+        </m:content>
+
+        <m:endButton>
+            <m:Button text="close" press=".onClose" />
+        </m:endButton>
+
+    </m:Dialog>
+</core:FragmentDefinition>
