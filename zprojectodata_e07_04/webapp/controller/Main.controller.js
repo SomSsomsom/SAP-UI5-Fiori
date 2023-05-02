@@ -69,7 +69,7 @@ sap.ui.define(
       },
       _search: function (sKey) {
         var oFilter = new sap.ui.model.Filter("CustomerID", "EQ", sKey);
-
+        // debugger;
         this.byId("idCustomerTable").getBinding("items").filter([oFilter]);
       },
     });
