@@ -1,0 +1,236 @@
+<mvc:View controllerName="zprojectteste0705.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <!-- <l:VerticalLayout >
+                <Input />
+                <Text text="test test"/>
+                <StepInput />
+                <ComboBox ></ComboBox>
+                <DatePicker ></DatePicker>
+                <Select />
+                <DateRangeSelection />
+                <CheckBox />
+            </l:VerticalLayout> -->
+            
+             <!-- <l:HorizontalLayout >
+                <Input />
+                <Text text="test test"/>
+                <StepInput />
+                <ComboBox ></ComboBox>
+                <DatePicker ></DatePicker>
+                <Select />
+                <DateRangeSelection />
+                <CheckBox />
+            </l:HorizontalLayout> -->
+
+            <Panel expandable="true" expanded="true">
+                <headerToolbar>
+                    <Toolbar >
+                        <Text text="Panel Header"/>
+                        <ToolbarSpacer />
+                        <Button text="Custom"/>
+                    </Toolbar> 
+                </headerToolbar>
+
+            <l:Grid >
+                <Input value="test1">
+                <layoutData>
+                    <l:GridData span="XL6 L2 M4 S12"/>
+                </layoutData>
+                </Input>
+
+                <Input value="test2">
+                <layoutData>
+                    <l:GridData span="XL6 L2 M4 S12"/>
+                </layoutData>
+                </Input>
+
+                <Input value="test3">
+                <layoutData>
+                    <l:GridData span="XL6 L2 M4 S12"/>
+                </layoutData>
+                </Input>
+
+                <Input value="test4">
+                <layoutData>
+                    <l:GridData span="XL6 L2 M4 S12"/>
+                </layoutData>
+                </Input>
+
+                <Input value="test5">
+                <layoutData>
+                    <l:GridData span="XL6 L2 M4 S12"/>
+                </layoutData>
+                </Input>
+  
+            </l:Grid>
+
+            <!-- <f:Form id="FormChangeColumn_threeGroups234"
+			editable="true">
+			<f:title>
+				<core:Title text="Supplier" />
+			</f:title>
+			<f:layout>
+				<f:ColumnLayout
+					columnsM="2"
+					columnsL="3"
+					columnsXL="4"
+				/>
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer title="Address">
+					<f:formElements>
+						<f:FormElement label="Name">
+							<f:fields>
+								<Input value="{SupplierName}" id="name"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Street">
+							<f:fields>
+								<Input value="{Street}" />
+								<Input value="{HouseNumber}">
+									<layoutData>
+										<f:ColumnElementData cellsSmall="2" cellsLarge="1" />
+									</layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="ZIP Code/City">
+							<f:fields>
+								<Input value="{ZIPCode}">
+									<layoutData>
+										<f:ColumnElementData cellsSmall="3" cellsLarge="2" />
+									</layoutData>
+								</Input>
+								<Input value="{City}" />
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Country">
+							<f:fields>
+								<Select id="country" selectedKey="{Country}">
+									<items>
+										<core:Item text="England" key="England"/>
+										<core:Item text="Germany" key="Germany"/>
+										<core:Item text="USA" key="USA"/>
+									</items>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Web">
+							<f:fields>
+								<Input value="{Url}" type="Url"/>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+				<f:FormContainer title="Contact">
+					<f:formElements>
+						<f:FormElement label="Twitter">
+							<f:fields>
+								<Input value="{Twitter}" />
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Email">
+							<f:fields>
+								<Input value="{Email}" type="Email"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Tel.">
+							<f:fields>
+								<Input value="{Tel}" type="Tel"/>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+				<f:FormContainer title="Other">
+					<f:formElements>
+						<f:FormElement label="SMS">
+							<f:fields>
+								<Input value="{Sms}" type="Tel"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Mobile">
+							<f:fields>
+								<Input value="{Mobile}" type="Tel"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Pager">
+							<f:fields>
+								<Input value="{Pager}" type="Tel"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Fax">
+							<f:fields>
+								<Input value="{Fax}" type="Tel"/>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form> -->
+
+
+        	<f:SimpleForm id="SimpleFormChangeColumn_threeGroups234"
+			editable="true"
+			layout="ColumnLayout"
+			title="Supplier"
+			columnsM="2"
+			columnsL="3"
+			columnsXL="4"
+			>
+			<f:content>
+				<core:Title text="Address" />
+				<Label text="Name" />
+				<Input id="name" value="{SupplierName}" />
+				<Label text="Street/No." />
+				<Input value="{Street}">
+				</Input>
+				<Input value="{HouseNumber}">
+					<layoutData>
+						<f:ColumnElementData cellsSmall="2" cellsLarge="1" />
+					</layoutData>
+				</Input>
+				<Label text="ZIP Code/City" />
+				<Input value="{ZIPCode}">
+					<layoutData>
+						<f:ColumnElementData cellsSmall="3" cellsLarge="2" />
+					</layoutData>
+				</Input>
+				<Input value="{City}" />
+				<Label text="Country" />
+				<Select id="country" selectedKey="{Country}">
+					<items>
+						<core:Item text="England" key="England"/>
+						<core:Item text="Germany" key="Germany"/>
+						<core:Item text="USA" key="USA"/>
+					</items>
+				</Select>
+				<Label text="Web" />
+				<Input value="{Url}" type="Url"/>
+				<core:Title text="Contact" />
+				<Label text="Twitter" />
+				<Input value="{Twitter}" />
+				<Label text="Email" />
+				<Input value="{Email}" type="Email"/>
+				<Label text="Tel." />
+				<Input value="{Tel}" type="Tel"/>
+				<core:Title text="Other" />
+				<Label text="SMS" />
+				<Input value="{Sms}" type="Tel"/>
+				<Label text="Mobile" />
+				<Input value="{Mobile}" type="Tel"/>
+				<Label text="Pager" />
+				<Input value="{Pager}" type="Tel"/>
+				<Label text="Fax" />
+				<Input value="{Fax}" type="Tel"/>
+			</f:content>
+		</f:SimpleForm>
+        </Panel>
+        </content>
+    </Page>
+</mvc:View>

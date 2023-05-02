@@ -1,0 +1,19 @@
+<core:FragmentDefinition 
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Dialog id="addDialog" title="Todo List" beforeOpen="onBeforeOpen">
+        <content>
+        <HBox height="60px"
+              alignItems="Center"
+              justifyContent="Center">
+            <Label text="Content" class="sapUiSmallMarginEnd"/>
+            <Input value="{root>/value}" id="addInput"/>
+        </HBox>
+        </content>
+
+        <endButton>
+            <Button text="close" press=".onClose"/>
+        </endButton>
+
+    </Dialog>
+</core:FragmentDefinition>

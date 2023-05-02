@@ -1,0 +1,39 @@
+<mvc:View controllerName="zprojectodatae0702.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+
+             <t:Table
+				rows="{/CarrierSet}"  
+				selectionMode="MultiToggle"
+				visibleRowCount="7"
+				paste="onPaste"
+				ariaLabelledBy="title">
+				<t:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="Products"/>
+					</OverflowToolbar>
+				</t:extension>
+				<t:columns>
+					<t:Column>
+						<Label text="Carr ID" />
+						<t:template>
+							<Text text="{Carrid}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+                    <t:Column>
+						<Label text="Carr name" />
+						<t:template>
+							<Text text="{Carrname}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					
+				</t:columns>
+			</t:Table>
+        </content>
+    </Page>
+</mvc:View>
