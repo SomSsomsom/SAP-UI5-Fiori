@@ -33,7 +33,15 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <Text text="test" />
+            <layout:VerticalLayout>
+                <Input value="{DetailModel>/data/OrderID}" description="CustomerID" />
+                <Input value="{DetailModel>/data/CustomerID}" description="CustomerID" />
+                <Input value="{DetailModel>/data/EmployeeID}" description="EmployeeID" />
+                <Input value="{DetailModel>/data/OrderDate}" description="OrderDate" />
+                <Input value="{DetailModel>/data/RequiredDate}" description="RequiredDate" />
+            </layout:VerticalLayout>
+
+            <!-- <Text text="test" /> -->
         </f:content>
         <!-- DynamicPage Footer -->
         <f:footer>
