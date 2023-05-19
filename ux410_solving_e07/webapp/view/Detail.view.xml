@@ -1,0 +1,71 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:m="sap.m"
+    controllerName="sap.btp.ux410solvinge07.controller.Detail"
+    height="100%">
+
+    <ObjectPageLayout id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        showEditHeaderButton="true"
+        editHeaderButtonPress="handleEditBtnPress"
+        upperCaseAnchorBar="false">
+        <!--
+        binding="{/Order_Details}" -->
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:HBox>
+                        <m:Title text="OrderID: {OrderID}" wrapping="true" />
+                        <m:ObjectMarker type="Favorite" class="sapUiTinyMarginBegin" />
+                    </m:HBox>
+                </expandedHeading>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <sections>
+            <ObjectPageSection titleUppercase="false" id="goalsSection">
+                <ObjectPageSubSection id="goalsSectionSS1">
+                    <blocks>
+                        <f:SimpleForm id="SimpleFormDisplay354"
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            title="Info"
+                            labelSpanXL="3"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="4"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            emptySpanS="0"
+                            columnsXL="1"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false">
+                            <f:content>
+                                <m:Label text="OrderID" />
+                                <m:Text text="{OrderID}" wrapping="false" id="idOrderID" />
+
+                                <m:Label text="ProductID" />
+                                <m:Text text="{ProductID}" wrapping="false" id="idProductID" />
+
+                                <m:Label text="UnitPrice" />
+                                <m:Text text="{UnitPrice}" wrapping="false" id="idUnitPrice" />
+
+                                <m:Label text="Quantity" />
+                                <m:Text text="{Quantity}" wrapping="false" id="idQuantity" />
+
+                                <m:Label text="Discount" />
+                                <m:Text text="{Discount}" wrapping="false" id="idDiscount" />
+                            </f:content>
+                        </f:SimpleForm>
+                    </blocks>
+                </ObjectPageSubSection>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

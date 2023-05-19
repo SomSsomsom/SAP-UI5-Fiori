@@ -1,0 +1,54 @@
+<mvc:View controllerName="zezoui5r06.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns="sap.m">
+
+    <VBox class="sapUiSmallMargin">
+        <SinglePlanningCalendar
+            id="SPC1"
+            class="sapUiSmallMarginTop"
+            title="My Calendar"
+            appointments="{path: '/appointments'}">
+            <!-- appointments="{path: '/SCHAPTSet'}"> -->
+            <!-- viewChange="handleViewChange"
+            appointmentSelect="handleAppointmentSelect"
+            headerDateSelect="handleHeaderDateSelect"
+            startDateChange="handleStartDateChange"
+            appointmentDrop="handleAppointmentDrop"
+            appointmentResize="handleAppointmentResize"
+            appointmentCreate="handleAppointmentCreateDnD"
+            moreLinkPress="handleMoreLinkPress"
+            startDate="{path: '/SCHAPTSet/Schdate'}"
+            enableAppointmentsDragAndDrop="{settings>/enableAppointmentsDragAndDrop}"
+            enableAppointmentsResize="{settings>/enableAppointmentsResize}"
+            enableAppointmentsCreate="{settings>/enableAppointmentsCreate}"
+            stickyMode="{settings>/stickyMode}" -->
+            <actions>
+                <Button id="legendButton" icon="sap-icon://legend" press="handleOpenLegend"
+                    tooltip="Open SinglePlanningCalendar legend" ariaHasPopup="Dialog" />
+            </actions>
+            <views>
+                <SinglePlanningCalendarDayView key="DayView" title="Day" />
+                <SinglePlanningCalendarWorkWeekView key="WorkWeekView" title="Work Week" />
+                <SinglePlanningCalendarWeekView key="WeekView" title="Week" />
+                <SinglePlanningCalendarMonthView key="MonthView" title="Month" />
+            </views>
+            <appointments>
+                <unified:CalendarAppointment
+                    title="{title}"
+                    text="{text}"
+                    type="{type}"
+                    icon="{icon}"
+                    startDate="{startDate}"
+                    endDate="{endDate}">
+                    <!-- title="{Prdonum}"
+                    text="{Wctxt}"
+                    type="{Status}"
+                    startDate="{path: 'Schdate', formatter: '.formatDate'}"
+                    endDate="{path: 'Schdate', formatter: '.formatEndDate'}"> -->
+                </unified:CalendarAppointment>
+            </appointments>
+        </SinglePlanningCalendar>
+    </VBox>
+</mvc:View>

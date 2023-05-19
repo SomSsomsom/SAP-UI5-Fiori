@@ -1,0 +1,131 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:m="sap.m"
+>
+    <m:Dialog id="addDialog" title="Products" draggable="true"
+        resizable="true">
+        <m:content>
+            <!-- <HBox height="60px"
+                alignItems="Center"
+                justifyContent="Center">
+                <Label text="Content" class="sapUiSmallMarginEnd" />
+                <Input value="{root>/value}" id="addInput" />
+            </HBox> -->
+
+            <Table
+                rows="{/Products}"
+                selectionMode="Single"
+                visibleRowCount="7"
+                paste="onPaste"
+                ariaLabelledBy="title"
+                rowSelectionChange="onSelectChange"
+                id="idProductTable">
+                <extension>
+                    <m:OverflowToolbar style="Clear">
+                        <m:Title text="Products" />
+                    </m:OverflowToolbar>
+                </extension>
+
+                <columns>
+                    <Column width="200px" hAlign="Center">
+                        <m:Label text="Product ID" />
+                        <template>
+                            <m:Text text="{ProductID}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Product Name" />
+                        <template>
+                            <m:Text text="{ProductName}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Supplier ID" />
+                        <template>
+                            <m:Text text="{SupplierID}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Category ID" />
+                        <template>
+                            <m:Text text="{CategoryID}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Quantity Per Unit" />
+                        <template>
+                            <m:Text text="{QuantityPerUnit}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Unit Price" />
+                        <template>
+                            <m:Text text="{UnitPrice}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Units In Stock" />
+                        <template>
+                            <m:Text text="{UnitsInStock}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Units On Order" />
+                        <template>
+                            <m:Text text="{UnitsOnOrder}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Reorder Level" />
+                        <template>
+                            <m:Text text="{ReorderLevel}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Discontinued" />
+                        <template>
+                            <m:Text
+                                text=" {
+                                path : 'Discontinued' ,
+                                formatter : '.formatter.customFormat'
+                                }" />
+                            <!-- <m:Text text="{=${Discontinued} === true ? 'Yes' : 'No' }"/>
+                            //formatter 안거치고 바로 처리-->
+                            / </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Status" />
+                        <template>
+                            <!-- <m:Text text="{ReorderLevel}" wrapping="false" /> -->
+                            <core:Icon
+                                src=" {= ${UnitPrice} &lt; 15? 'sap-icon://thumb-down':'sap-icon://thumb-up'}"
+                                color="{=${UnitPrice} &lt; 15? '#FF0000':'#1DDB16'}" />
+                        </template>
+                    </Column>
+
+
+                </columns>
+            </Table>
+
+        </m:content>
+
+        <m:endButton>
+            <m:Button text="close" press=".onClose" />
+        </m:endButton>
+
+    </m:Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,76 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc" xmlns:u="sap.ui.unified" xmlns:c="sap.ui.core"
+    xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data">
+    <Dialog id="infoDialog" title="Carrier List" draggable="true" resizable="true">
+        <content>
+            <FlexBox alignItems="Start" justifyContent="Start">
+                <Table id="idTable1" inset="true"
+                    items="{
+                    path: 'carrierData>/',
+                     
+                            expand: 'to_Item',
+                        
+                    templateShareable: false
+                }">
+                    <columns>
+                        <Column>
+                            <Text text="Carrid" />
+                        </Column>
+                        <Column>
+                            <Text text="Connid" />
+                        </Column>
+                        <Column>
+                            <Text text="Seatsmax" />
+                        </Column>
+                        <Column>
+                            <Text text="Seatsocc" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{carrierData>/Carrid}" />
+                                <Text text="{carrierData>/Carrname}" />
+                                <Text text="{carrierData>/Currcode}" />
+                                <Text text="{carrierData>/Url}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                <viz:VizFrame vizType="stacked_column" uiConfig="{applicationSet:'fiori'}"
+                    vizProperties="{
+                    'title': {'visible': true, 'text': '예약현황'},
+                    'legendGroup': {'layout': {'position': 'left'}},
+                    'plotArea': {
+                        'drawingEffect': 'glossy',
+                        'dataLabel': {'visible': true, 'type': 'value'}
+                    }
+                }">
+                    <viz:dataset>
+                        <viz.data:FlattenedDataset data="{carrierData>/}">
+                            <viz.data:dimensions>
+                                <viz.data:DimensionDefinition name="항공편번호"
+                                    value="{carrierData>/Carrid}" />
+                            </viz.data:dimensions>
+                            <viz.data:measures>
+                                <viz.data:MeasureDefinition name="예약 좌석"
+                                    value="{carrierData>/Seatsocc}" />
+                                <viz.data:MeasureDefinition name="총 좌석"
+                                    value="{carrierData>/Seatsmax}" />
+                            </viz.data:measures>
+                        </viz.data:FlattenedDataset>
+                    </viz:dataset>
+                    <viz:feeds>
+                        <viz.feeds:FeedItem id="valueAxisFeed" uid="valueAxis" type="Measure"
+                            values="예약 좌석,총 좌석" />
+                        <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="항공편번호" />
+                    </viz:feeds>
+                </viz:VizFrame>
+            </FlexBox>
+        </content>
+        <endButton>
+            <Button text="close" press=".onClose" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

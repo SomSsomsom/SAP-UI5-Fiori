@@ -1,0 +1,96 @@
+<mvc:View controllerName="zezoui5r0601.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns="sap.m">
+
+    <ScrollContainer height="100%" width="100%" vertical="true">
+        <VBox class="sapUiSmallMargin">
+
+            <!-- <OverflowToolbar height="100%" width="100%">
+                <Label text="Select sticky mode" labelFor="stickyModeSelect" />
+                <Select id="stickyModeSelect" selectedKey="{settings>/stickyMode}">
+                    <core:ListItem text="None" key="None" />
+                    <core:ListItem text="All" key="All" />
+                    <core:ListItem text="NavBarAndColHeaders" key="NavBarAndColHeaders" />
+                </Select>
+                <ToolbarSeparator />
+                <Label text="Appointment Actions : " />
+                <ToggleButton text="Drag and Drop" id="enableAppointmentsDragAndDrop"
+                    pressed="{settings>/enableAppointmentsDragAndDrop}" />
+                <ToggleButton text="Drag and Create" id="enableAppointmentsCreate"
+                    pressed="{settings>/enableAppointmentsCreate}" />
+                <ToggleButton text="Resize" id="enableAppointmentsResize"
+                    pressed="{settings>/enableAppointmentsResize}" />
+            </OverflowToolbar> -->
+
+            <OverflowToolbar id="otb7">
+
+                <Label text="Work Center" />
+                <MultiComboBox
+                    selectionChange="handleSelectionChange"
+                    width="550px">
+                    <core:ListItem key="1001" text="1F-Weighing Room" />
+                    <core:ListItem key="1002" text="1F-Manufacturing Room" />
+                    <core:ListItem key="1003" text="1F-Filling/Assembly Room1" />
+                    <core:ListItem key="1004" text="1F-Filling/Assembly Room2" />
+                    <core:ListItem key="1005" text="1F-Filling/Assembly Room3" />
+
+                </MultiComboBox>
+
+            </OverflowToolbar>
+
+
+            <SinglePlanningCalendar
+                id="SPC1"
+                class="sapUiSmallMarginTop"
+                title="My Calendar"
+                viewChange="handleViewChange"
+                appointmentSelect="handleAppointmentSelect"
+                headerDateSelect="handleHeaderDateSelect"
+                startDateChange="handleStartDateChange"
+                appointmentDrop="handleAppointmentDrop"
+                appointmentResize="handleAppointmentResize"
+                appointmentCreate="handleAppointmentCreateDnD"
+                moreLinkPress="handleMoreLinkPress"
+                appointments="{path: 'sch_j>/'}">
+
+                <actions>
+                    <Button id="legendButton" icon="sap-icon://legend" press="handleOpenLegend"
+                        tooltip="Open SinglePlanningCalendar legend" ariaHasPopup="Dialog" />
+                </actions>
+                <views>
+                    <SinglePlanningCalendarMonthView key="MonthView" title="Month" />
+                    <SinglePlanningCalendarWeekView key="WeekView" title="Week" />
+                    <SinglePlanningCalendarDayView key="DayView" title="Day" />
+                    <!-- <SinglePlanningCalendarWorkWeekView key="WorkWeekView" title="Work Week" /> -->
+
+
+                </views>
+                <appointments>
+                    <!-- <unified:CalendarAppointment
+                        title="{sch_j>Prdonum}"
+                        text="{sch_j>Wctxt}"
+                        type="{unified.CalendarDayType.Type01}"
+                        icon="{icon}"
+                        startDate="{parts: [{path: 'sch_j>Schdate'}, {path: 'sch_j>Stime'}], formatter:
+                        '.formatDateTime'}"
+                        endDate="{parts: [{path: 'sch_j>Schdate'}, {path: 'sch_j>Etime'}], formatter:
+                        '.formatDateTime'}">
+                    </unified:CalendarAppointment> -->
+                    <unified:CalendarAppointment
+                        title="{sch_j>Prdonum}"
+                        text="{sch_j>Wctxt}"
+                        type="{sch_j>type}"
+                        icon="{sch_j>icon}"
+                        startDate="{sch_j>startDate}"
+                        endDate="{sch_j>endDate}">
+                    </unified:CalendarAppointment>
+
+                </appointments>
+            </SinglePlanningCalendar>
+
+        </VBox>
+    </ScrollContainer>
+
+</mvc:View>

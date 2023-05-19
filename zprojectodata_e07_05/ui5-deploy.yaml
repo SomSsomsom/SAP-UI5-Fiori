@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "2.6"
+metadata:
+  name: zprojectodatae0705
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://edu.bgis.co.kr:8001/
+          client: "100"
+        app:
+          name: ZUI5APP_E07_02
+          description: Second UI5 App(Odata 5)
+          package: $tmp
+          transport: ""
+        exclude:
+          - /test/
