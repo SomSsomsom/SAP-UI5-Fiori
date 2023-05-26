@@ -29,6 +29,8 @@
                 <Label text="Work Center" />
                 <MultiComboBox
                     selectionChange="handleSelectionChange"
+                    selectionFinish="handleSelectionFinish"
+                    showSelectAll="true"
                     width="550px">
                     <core:ListItem key="1001" text="1F-Weighing Room" />
                     <core:ListItem key="1002" text="1F-Manufacturing Room" />
@@ -44,7 +46,7 @@
             <SinglePlanningCalendar
                 id="SPC1"
                 class="sapUiSmallMarginTop"
-                title="My Calendar"
+                title="Factory Calendar"
                 viewChange="handleViewChange"
                 appointmentSelect="handleAppointmentSelect"
                 headerDateSelect="handleHeaderDateSelect"

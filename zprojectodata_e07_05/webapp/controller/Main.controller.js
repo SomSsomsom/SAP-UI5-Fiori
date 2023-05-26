@@ -73,7 +73,7 @@ sap.ui.define(
             this.oMainModel.setProperty("/", oReturn);
             // this.byId("idInput1").setValue(oReturn.Productno);
             // this.byId("idInput2").setValue(oReturn.Productname);
-            // this.byId("idInput3").setValue(oReturn.Fname);
+            // this.byId("idInput3").setValue(oReturn.Fname);;
             // this.byId("idInput4").setValue(oReturn.Lname);
             // this.byId("idInput5").setValue(oReturn.Memo);
           }.bind(this),

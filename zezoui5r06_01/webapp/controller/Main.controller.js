@@ -61,7 +61,7 @@ sap.ui.define(
                   item.type = "Type09";
                   item.icon = "sap-icon://factory";
                 } else if (item.Wccode === "1005") {
-                  item.type = "Type03";
+                  item.type = "Type06";
                   item.icon = "sap-icon://factory";
                 } else {
                   item.type = "Type02";
@@ -102,7 +102,7 @@ sap.ui.define(
             },
             {
               text: "1F-Filling/Assembly Room3",
-              type: CalendarDayType.Type03,
+              type: CalendarDayType.Type06,
             },
           ],
         });
@@ -382,6 +382,10 @@ sap.ui.define(
         var oDetailsPopover = this.byId("detailsPopover");
         oDetailsPopover.close();
       },
+      onCloseButtonPress1: function () {
+        var oPrdoPopover = this.byId("PrdoPopover");
+        oPrdoPopover.close();
+      },
       formatDateTime: function (date, time) {
         var oDate = new Date(date),
           oTime = new Date(time.ms);
@@ -427,6 +431,14 @@ sap.ui.define(
           }
         }
       },
+      formatQty: function (value) {
+        var formatter = new sap.ui.model.type.Integer({
+          decimalSeparator: ",",
+          groupingSeparator: ",",
+          groupingEnabled: true,
+        });
+        return formatter.formatValue(value, "string");
+      },
 
       // _getDefaultAppointmentStartHour: function () {
       //   return 9;
@@ -440,13 +452,13 @@ sap.ui.define(
       //   oDate.setHours(0, 0, 0, 0);
       // },
 
-      handleStartDateChange: function (oEvent) {
-        var oStartDate = oEvent.getParameter("date");
-        MessageToast.show(
-          "'startDateChange' event fired.\n\nNew start date is " +
-            oStartDate.toString()
-        );
-      },
+      // handleStartDateChange: function (oEvent) {
+      //   var oStartDate = oEvent.getParameter("date");
+      //   MessageToast.show(
+      //     "'startDateChange' event fired.\n\nNew start date is " +
+      //       oStartDate.toString()
+      //   );
+      // },
 
       handleOpenLegend: function (oEvent) {
         var oSource = oEvent.getSource(),
@@ -481,25 +493,52 @@ sap.ui.define(
           state = "Deselected";
         }
 
-        MessageToast.show(
-          "Event 'selectionChange': " +
-            state +
-            " '" +
-            changedItem.getText() +
-            "'",
-          {
-            width: "auto",
-          }
-        );
+        MessageToast.show(state + " '" + changedItem.getText() + "'", {
+          width: "auto",
+        });
+      },
+      handleSelectionFinish: function (oEvent) {
+        var bbb = oEvent.getSource().getSelectedKeys();
+        var aFilter = [];
+
+        for (var i = 0; i < bbb.length; i++) {
+          var oFilter = new sap.ui.model.Filter("Wccode", "EQ", bbb[i]);
+          aFilter.push(oFilter);
+        }
+
+        this.byId("SPC1").getBinding("appointments").filter(aFilter);
       },
 
-      // handleHeaderDateSelect: function (oEvent) {
-      //   var selectedDate = oEvent.getSource().getStartDate();
-      //   var oCalendar = that.getView().byId("SPC1");
-      //   oCalendar.setViewKey("DayView");
-      //   oCalendar.setStartDate(selectedDate);
-      //   oCalendar.fireStartDateChange({ startDate: selectedDate });
+      // handleEditButton: function (oEvent) {
+      //   var oDetailsPopover = this.byId("detailsPopover");
+      //   var oPrdoPopover = this.byId("PrdoPopover");
+      //   oDetailsPopover.close();
+      //   // this.sPath = oDetailsPopover.getBindingContext().getPath();
+      //   // this._arrangeDialogFragment("Edit appointment");
+      //   oPrdoPopover.open();
       // },
+
+      handleEditButton: function () {
+        var oView = this.getView();
+        var oDetailsPopover = oView.byId("detailsPopover");
+        var oPrdoPopover = oView.byId("PrdoPopover");
+
+        if (!oPrdoPopover) {
+          Fragment.load({
+            id: this.getView().getId(),
+            name: "zezoui5r0601.view.Prdo",
+            controller: this,
+          }).then(
+            function (oResponsivePopover) {
+              this.getView().addDependent(oResponsivePopover);
+              oResponsivePopover.openBy(oDetailsPopover);
+              return oResponsivePopover;
+            }.bind(this)
+          );
+        } else {
+          oPrdoPopover.openBy(oDetailsPopover);
+        }
+      },
     });
   }
 );

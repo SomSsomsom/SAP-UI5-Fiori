@@ -1,0 +1,204 @@
+<mvc:View controllerName="zezoui5c03.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:m="sap.m">
+    <m:Page id="page" title="Material CRUD">
+        <m:content>
+            <Table id="table" selectionMode="Single" visibleRowCount="16"
+                enableColumnReordering="true"
+                enableCellFilter="true"
+                rowSelectionChange="onRowSelect"
+                enableSelectAll="false"
+                ariaLabelledBy="title" rows="{path: '/MatSet'}">
+                <extension>
+                    <m:OverflowToolbar style="Clear">
+                        <m:Label text="자재번호" labelFor="MatnumInput" />
+                        <m:Input
+                            width="20%"
+                            id="MatnumInput"
+                            placeholder="1:원자재 2:부자재 3:반제품 4:완제품"
+                            showSuggestion="true"
+                            suggestionItems="{/MatSet}">
+                            <m:suggestionItems>
+                                <core:Item key="{Matnum}" text="{Matnum} ({Mattxt})" />
+                            </m:suggestionItems>
+                        </m:Input>
+
+                        <m:Label text="자재명" labelFor="MattxtInput" />
+                        <m:Input
+                            width="15%"
+                            id="MattxtInput"
+                            showSuggestion="true"
+                            suggestionItems="{/MatSet}">
+                            <m:suggestionItems>
+                                <core:Item text="{Mattxt}" />
+                            </m:suggestionItems>
+                        </m:Input>
+
+                        <m:Label text="자재유형" />
+                        <m:MultiComboBox
+                            selectionFinish="handleSelectionFinish"
+                            showSelectAll="true"
+                            width="15%"
+                            selectedKeys="{MattypeSelectedKeys}"
+                            id="MattypeBox">
+                            <core:ListItem key="FERT" text="완제품" />
+                            <core:ListItem key="HALB" text="반제품" />
+                            <core:ListItem key="VERP" text="부자재" />
+                            <core:ListItem key="ROH" text="원자재" />
+
+                        </m:MultiComboBox>
+
+                        <m:Button
+                            icon="sap-icon://search"
+                            text="Search"
+                            press="onSearchPress" />
+
+                    </m:OverflowToolbar>
+
+                    <m:OverflowToolbar>
+                        <m:ToolbarSpacer />
+
+                        <m:Button
+                            icon="sap-icon://add-product"
+                            text="Create"
+                            press="onCreatePress" />
+
+                        <m:Button
+                            icon="sap-icon://edit"
+                            text="Modify"
+                            press="onModifyPress" />
+
+                        <!-- <m:Button
+                            icon="sap-icon://delete"
+                            text="Delete"
+                            press="onDeletePress" /> -->
+
+                    </m:OverflowToolbar>
+
+                </extension>
+                <columns>
+                    <Column
+                        width="6.1rem"
+                    >
+                        <m:Label text="자재번호" />
+                        <template>
+                            <m:Text text="{Matnum}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column
+                        width="7rem"
+                    >
+                        <m:Label text="자재유형" />
+                        <template>
+                            <m:Text text="{Mattype} ({Mattypetxt})" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <!-- <Column
+                        width="11rem"
+                    >
+                        <m:Label text="Material Type Text" />
+                        <template>
+                            <m:Text text="{Mattypetxt}" wrapping="false" />
+                        </template>
+                    </Column> -->
+
+                    <Column
+                        width="23rem"
+                    >
+
+                        <m:Label text="자재명" />
+                        <template>
+                            <m:Text text="{Mattxt}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column
+                        width="3rem"
+                    >
+                        <m:Label text="단위" />
+                        <template>
+                            <m:Text text="{Unit}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column
+                        width="5rem"
+                        hAlign="End"
+                    >
+                        <m:Label text="Scrap(%)" />
+                        <template>
+                            <m:Text text="{Scrap}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column
+                        width="8.5rem"
+                        hAlign="End"
+                    >
+                        <m:Label text="자재유효기간 (일)" />
+                        <template>
+                            <m:Text text="{path: 'Matper', formatter: '.formatDays'}"
+                                wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column
+                        width="8.5rem"
+                        hAlign="End"
+                    >
+                        <m:Label text="생산소요기간 (일)" />
+                        <template>
+                            <m:Text text="{path: 'Prodper', formatter: '.formatDays'}"
+                                wrapping="false" />
+                        </template>
+                    </Column>
+
+
+                    <Column
+                        width="7rem"
+                        hAlign="End"
+                    >
+                        <m:Label text="표준단가" />
+                        <template>
+                            <m:Text
+                                text="{path: 'Stdprice', formatter: '.formatPrice'}"
+                                wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column
+                        width="3.8rem"
+                    >
+                        <m:Label text="통화" />
+                        <template>
+                            <m:Text text="{Currency}" wrapping="false" />
+                        </template>
+                    </Column>
+
+                    <Column
+                        hAlign="Center"
+                        width="5rem"
+                    >
+                        <m:Label text="사용여부" />
+                        <template>
+                            <m:ObjectStatus
+                                state="{= ${Delflag} === 'X' ? 'Error' : 'None' }"
+                                icon="{= ${Delflag} === 'X' ? 'sap-icon://error' : '' }"
+                            />
+                        </template>
+                    </Column>
+
+
+                </columns>
+
+
+            </Table>
+        </m:content>
+    </m:Page>
+</mvc:View> 

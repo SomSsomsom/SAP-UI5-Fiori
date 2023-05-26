@@ -4,9 +4,21 @@
     xmlns:core="sap.ui.core">
     <ResponsivePopover
         id="detailsPopover"
-        title="{sch_j>/Popover/Prdonum}"
+        icon="sap-icon://appointment"
         class="sapUiResponsivePadding--header"
         placement="Auto">
+
+        <customHeader>
+            <Toolbar>
+                <core:Icon src="sap-icon://appointment" class="customIcon" />
+                <Title text="Reservation Information" />
+
+            </Toolbar>
+        </customHeader>
+        <beginButton>
+            <Button text="상세정보" type="Emphasized" press="handleEditButton" id="detailButton"
+            />
+        </beginButton>
         <endButton>
             <Button text="Close" press="onCloseButtonPress" />
         </endButton>
@@ -15,17 +27,19 @@
             editable="false"
             layout="ResponsiveGridLayout"
             singleContainerFullSize="false">
+            <Label text="Production Order Number" labelFor="Prdonum" class="customLabel" />
+            <Text text="{sch_j>/Popover/Prdonum}" />
             <Label
                 text="Work Center"
-                labelFor="Wctxt" />
+                labelFor="Wctxt" class="customLabel" />
             <Text id="moreInfoText" text="{path: 'sch_j>/Popover/Wctxt'}" />
             <!-- <Text id="moreInfoText" text="{text}" /> -->
-            <Label text="From" labelFor="startDate" />
+            <Label text="From" labelFor="startDate" class="customLabel" />
             <Text text="{ path: 'sch_j>/Popover/startDate', formatter: '.formatDate' }" />
-            <Label text="To" labelFor="endDate" />
+            <Label text="To" labelFor="endDate" class="customLabel" />
             <Text text="{ path: 'sch_j>/Popover/endDate', formatter: '.formatDate' }" />
 
-            <Label text="Routing Name" labelFor="Rtname" />
+            <Label text="Routing Name" labelFor="Rtname" class="customLabel" />
             <Text text="{sch_j>/Popover/Rtname}" />
             <!-- <Text id="appTypeText"
                 text="{ path: 'sch_j>/Popover/type', formatter: '.typeFormatter' }" /> -->

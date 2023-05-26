@@ -1,0 +1,160 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:m="sap.m"
+>
+    <m:Dialog id="addDialog" icon="sap-icon://add-equipment" title="자재 등록"
+        draggable="true"
+        resizable="true">
+        <m:content>
+            <m:VBox
+                width="90%"
+                justifyContent="Center"
+                alignItems="Start"
+                class="sapUiSmallMarginBegin">
+
+
+                <m:Label text="자재번호" labelFor="idMatnum" />
+                <m:Input
+                    value="{main>/Matnum}"
+                    id="idMatnum"
+                    class="sapUiSmallMarginBottom"
+                    type="Text"
+                    width="16rem"
+                    placeholder="1:원자재 2:부자재 3:반제품 4:완제품"
+                    enabled="true"
+                    editable="true"
+                    maxLength="8"
+                    liveChange="onMatnumLiveChange"
+                />
+
+
+                <m:Label text="자재유형" labelFor="idMattype" />
+
+                <m:Select
+                    class="sapUiSmallMarginBottom"
+                    selectedKey="{main>/Mattype}"
+                    id="idMattype">
+
+                    <core:ListItem key="FERT" text="완제품" />
+                    <core:ListItem key="HALB" text="반제품" />
+                    <core:ListItem key="VERP" text="부자재" />
+                    <core:ListItem key="ROH" text="원자재" />
+
+
+                </m:Select>
+
+                <!-- <m:Label text="Language" labelFor="idLangu" />
+                <m:Select
+                    class="sapUiSmallMarginBottom"
+                    selectedKey="{main>/Langu}"
+                    id="idLangu">
+
+                    <core:Item key="E" text="English" />
+                    <core:Item key="3" text="한국어" />
+
+                </m:Select> -->
+
+                <m:Label text="자재명 (국문)" labelFor="idMattxt" />
+                <m:Input
+                    value="{main>/Mattxt}"
+                    id="idMattxt"
+                    class="sapUiSmallMarginBottom"
+                    type="Text"
+                    enabled="true"
+                    editable="true"
+                    liveChange="onMattxtLiveChange"
+                />
+
+                <m:Label text="자재명 (영문)" labelFor="idMattxte" />
+                <m:Input
+                    value="{txt>/Mattxt}"
+                    id="idMattxte"
+                    class="sapUiSmallMarginBottom"
+                    type="Text"
+                    enabled="true"
+                    editable="true"
+                    liveChange="onMattxteLiveChange"
+                />
+
+
+                <m:Label text="단위" labelFor="idUnit" />
+                <m:Select
+                    class="sapUiSmallMarginBottom"
+                    selectedKey="{main>/Unit}"
+                    id="idUnit">
+
+                    <core:Item key="KG" text="KG" />
+                    <core:Item key="EA" text="EA" />
+
+                </m:Select>
+
+
+                <m:Label text="Scrap (%)" labelFor="idScrap" />
+                <m:Input
+                    value="{main>/Scrap}"
+                    id="idScrap"
+                    maxLength="4"
+                    class="sapUiSmallMarginBottom"
+                    type="Number"
+                    enabled="true"
+                    editable="true"
+                    liveChange="onScrapLiveChange"
+                />
+
+
+                <m:Label text="자재유효기간 (일)" labelFor="idMatper" />
+                <m:Input
+                    value="{main>/Matper}"
+                    id="idMatper"
+                    class="sapUiSmallMarginBottom"
+                    type="Number"
+                    enabled="true"
+                    editable="true"
+                    liveChange="onMatperLiveChange"
+                />
+
+                <m:Label text="생산소요기간 (일)" labelFor="idProdper" />
+                <m:Input
+                    value="{main>/Prodper}"
+                    id="idProdper"
+                    class="sapUiSmallMarginBottom"
+                    type="Number"
+                    enabled="true"
+                    editable="true"
+                    liveChange="onMatperLiveChange"
+                />
+
+                <m:Label text="표준단가 (KRW)" labelFor="idStdprice" />
+                <m:Input
+                    value="{main>/Stdprice}"
+                    width="12rem"
+                    id="idStdprice"
+                    class="sapUiSmallMarginBottom"
+                    type="Number"
+                    enabled="true"
+                    editable="true"
+                    liveChange="onMatperLiveChange"
+                />
+
+
+                <m:CheckBox class="sapUiSmallMarginBottom" text="미사용"
+                    id="idDelflag" />
+
+
+            </m:VBox>
+
+        </m:content>
+        <m:beginButton>
+            <m:Button text="Save" press="onSaveDialog" type="Emphasized" />
+        </m:beginButton>
+        <m:endButton>
+
+            <m:Button text="close" press="onCloseDialog" />
+        </m:endButton>
+
+    </m:Dialog>
+</core:FragmentDefinition>

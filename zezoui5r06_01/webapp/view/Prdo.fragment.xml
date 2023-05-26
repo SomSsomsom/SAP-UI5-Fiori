@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <ResponsivePopover
+        id="PrdoPopover"
+        class="sapUiResponsivePadding--header"
+        placement="Auto">
+        <customHeader>
+            <Toolbar>
+                <core:Icon src="sap-icon://factory" class="customIcon1" />
+                <Title text="Production Information" />
+
+            </Toolbar>
+        </customHeader>
+        <endButton>
+            <Button text="Close" press="onCloseButtonPress1" />
+        </endButton>
+        <f:SimpleForm
+            id="appointmentEditForm1"
+            editable="false"
+            layout="ResponsiveGridLayout"
+            singleContainerFullSize="false">
+
+            <Label text="Production Order Number" labelFor="Prnum" class="customLabel1" />
+            <Text text="{sch_j>/Popover/Prdonum}" />
+
+            <Label text="Schedule order" labelFor="Itemnum" class="customLabel1" />
+            <Text text="{sch_j>/Popover/Itemnum}" />
+
+            <Label text="Production Request Number" labelFor="Prnum" class="customLabel1" />
+            <Text text="{sch_j>/Popover/Prnum}" />
+
+            <Label text="Production Quantity" labelFor="Prdoqty" class="customLabel1" />
+            <Text
+                text="{path: 'sch_j>/Popover/Prdoqty', formatter: '.formatQty'} {sch_j>/Popover/Unit}" />
+
+            <Label text="Person in Charge" labelFor="Pernr" class="customLabel1" />
+            <Text text="{sch_j>/Popover/Name} ({sch_j>/Popover/Pernr})" />
+
+            <Label text="Status" labelFor="Status" class="customLabel1" />
+            <Text text="{sch_j>/Popover/Status}" />
+        </f:SimpleForm>
+    </ResponsivePopover>
+</core:FragmentDefinition>
