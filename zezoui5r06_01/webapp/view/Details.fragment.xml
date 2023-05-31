@@ -11,7 +11,7 @@
         <customHeader>
             <Toolbar>
                 <core:Icon src="sap-icon://appointment" class="customIcon" />
-                <Title text="Reservation Information" />
+                <Title text="예약 정보" />
 
             </Toolbar>
         </customHeader>
@@ -20,26 +20,26 @@
             />
         </beginButton>
         <endButton>
-            <Button text="Close" press="onCloseButtonPress" />
+            <Button text="닫기" press="onCloseButtonPress" />
         </endButton>
         <f:SimpleForm
             id="appointmentEditForm"
             editable="false"
             layout="ResponsiveGridLayout"
             singleContainerFullSize="false">
-            <Label text="Production Order Number" labelFor="Prdonum" class="customLabel" />
+            <Label text="생산 오더 번호" labelFor="Prdonum" class="customLabel" />
             <Text text="{sch_j>/Popover/Prdonum}" />
             <Label
-                text="Work Center"
+                text="작업장"
                 labelFor="Wctxt" class="customLabel" />
             <Text id="moreInfoText" text="{path: 'sch_j>/Popover/Wctxt'}" />
             <!-- <Text id="moreInfoText" text="{text}" /> -->
-            <Label text="From" labelFor="startDate" class="customLabel" />
+            <Label text="시작시간" labelFor="startDate" class="customLabel" />
             <Text text="{ path: 'sch_j>/Popover/startDate', formatter: '.formatDate' }" />
-            <Label text="To" labelFor="endDate" class="customLabel" />
+            <Label text="종료시간" labelFor="endDate" class="customLabel" />
             <Text text="{ path: 'sch_j>/Popover/endDate', formatter: '.formatDate' }" />
 
-            <Label text="Routing Name" labelFor="Rtname" class="customLabel" />
+            <Label text="공정명" labelFor="Rtname" class="customLabel" />
             <Text text="{sch_j>/Popover/Rtname}" />
             <!-- <Text id="appTypeText"
                 text="{ path: 'sch_j>/Popover/type', formatter: '.typeFormatter' }" /> -->

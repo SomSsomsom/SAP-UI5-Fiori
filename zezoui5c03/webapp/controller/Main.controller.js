@@ -122,9 +122,17 @@ sap.ui.define(
           .getSource() /*Button 객체 가져옴*/
           .getParent(); //Dialog 객체
 
+        var oView = this.getView();
+
+        oView.byId("idMattxt1").setValueState("None");
+        oView.byId("idUnit1").setValueState("None");
+        oView.byId("idScrap1").setValueState("None");
+        oView.byId("idMatper1").setValueState("None");
+        oView.byId("idProdper1").setValueState("None");
+        oView.byId("idStdprice1").setValueState("None");
+
         oDialog.close();
       },
-
       onSaveDialog: function (oEvent) {
         var oData = this.oMainModel.getData();
         var oTxtData = this.oTxtModel.getData();
@@ -137,57 +145,148 @@ sap.ui.define(
           : "";
         var oMatnum = this.getView().byId("idMatnum").getValue();
 
-        oData.Mattype = oMattype;
-        oData.Langu = "3";
-        oData.Unit = oUnit;
-        oData.Currency = "KRW";
-        oData.Delflag = oDelflag;
-        // oTxtData.Langu = "E";
-        oTxtData.Matnum = oMatnum;
+        this.oModel.read("/MatSet", {
+          success: function (oResponse) {
+            var existingMatnums = oResponse.results.map(function (item) {
+              return item.Matnum;
+            });
 
-        // Check if all fields have values
-        if (
-          oData.Matnum &&
-          oData.Mattype &&
-          oData.Mattxt &&
-          oTxtData.Mattxt &&
-          oData.Unit &&
-          oData.Scrap &&
-          oData.Matper &&
-          oData.Prodper &&
-          oData.Stdprice
-        ) {
-          // All fields have values, proceed with creating
-          var that = this; // Controller reference variable
+            if (existingMatnums.includes(oMatnum)) {
+              sap.m.MessageToast.show(
+                "자재번호가 중복되었습니다. 다른 값을 입력해주세요."
+              );
+              return;
+            }
 
-          this.oModel.create("/MatSet", oData, {
-            success: function () {
-              this.oModel.create("/MattextSet", oTxtData);
-              sap.m.MessageToast.show("등록 성공!");
-              oDialog.close();
+            oData.Mattype = oMattype;
+            oData.Langu = "3";
+            oData.Unit = oUnit;
+            oData.Currency = "KRW";
+            oData.Delflag = oDelflag;
+            // oTxtData.Langu = "E";
+            oTxtData.Matnum = oMatnum;
 
-              var oView = that.getView();
+            if (
+              oData.Matnum &&
+              oData.Mattype &&
+              oData.Mattxt &&
+              oTxtData.Mattxt &&
+              oData.Unit &&
+              oData.Scrap &&
+              oData.Matper &&
+              oData.Prodper &&
+              oData.Stdprice
+            ) {
+              var that = this;
 
-              oView.byId("idMatnum").setValue("");
-              oView.byId("idMattype").setSelectedKey("");
-              oView.byId("idMattxt").setValue("");
-              oView.byId("idMattxte").setValue("");
-              oView.byId("idUnit").setSelectedKey("");
-              oView.byId("idScrap").setValue("");
-              oView.byId("idMatper").setValue("");
-              oView.byId("idProdper").setValue("");
-              oView.byId("idStdprice").setValue("");
-              oView.byId("idDelflag").setSelected(false);
-            }.bind(this),
-            error: function () {
-              sap.m.MessageToast.show("등록 오류!");
-            },
-          });
-        } else {
-          // Show an error message indicating that all fields are required
-          sap.m.MessageBox.error("모든 값을 입력해주세요.");
-        }
+              this.oModel.create("/MatSet", oData, {
+                success: function () {
+                  this.oModel.create("/MattextSet", oTxtData);
+                  sap.m.MessageToast.show("자재 등록 성공!");
+                  oDialog.close();
+
+                  var oView = that.getView();
+
+                  oView.byId("idMatnum").setValue("");
+                  oView.byId("idMattype").setSelectedKey("");
+                  oView.byId("idMattxt").setValue("");
+                  oView.byId("idMattxte").setValue("");
+                  oView.byId("idUnit").setSelectedKey("");
+                  oView.byId("idScrap").setValue("");
+                  oView.byId("idMatper").setValue("");
+                  oView.byId("idProdper").setValue("");
+                  oView.byId("idStdprice").setValue("");
+                  oView.byId("idDelflag").setSelected(false);
+                }.bind(this),
+                error: function () {
+                  sap.m.MessageToast.show("자재 등록 오류!");
+                },
+              });
+            } else {
+              sap.m.MessageBox.error("모든 값을 입력해주세요.");
+            }
+          }.bind(this),
+          error: function () {
+            sap.m.MessageToast.show(
+              "서버에서 데이터를 가져오는 중 오류가 발생했습니다."
+            );
+          },
+        });
       },
+
+      // onSaveDialog: function (oEvent) {
+      //   var oData = this.oMainModel.getData();
+      //   var oTxtData = this.oTxtModel.getData();
+      //   var oDialog = oEvent.getSource().getParent();
+
+      //   var oMattype = this.getView().byId("idMattype").getSelectedKey();
+      //   var oUnit = this.getView().byId("idUnit").getSelectedKey();
+      //   var oDelflag = this.getView().byId("idDelflag").getSelected()
+      //     ? "X"
+      //     : "";
+      //   var oMatnum = this.getView().byId("idMatnum").getValue();
+
+      //   var newMatnum = this.getView().getModel("main").getProperty("/Matnum");
+      //   var existingMatnums = []; // Replace this with your logic to retrieve existing Matnums
+
+      //   if (existingMatnums.includes(newMatnum)) {
+      //     sap.m.MessageToast.show(
+      //       "자재번호가 중복되었습니다. 다른 값을 입력해주세요."
+      //     );
+      //     return;
+      //   }
+
+      //   oData.Mattype = oMattype;
+      //   oData.Langu = "3";
+      //   oData.Unit = oUnit;
+      //   oData.Currency = "KRW";
+      //   oData.Delflag = oDelflag;
+      //   // oTxtData.Langu = "E";
+      //   oTxtData.Matnum = oMatnum;
+
+      //   // Check if all fields have values
+      //   if (
+      //     oData.Matnum &&
+      //     oData.Mattype &&
+      //     oData.Mattxt &&
+      //     oTxtData.Mattxt &&
+      //     oData.Unit &&
+      //     oData.Scrap &&
+      //     oData.Matper &&
+      //     oData.Prodper &&
+      //     oData.Stdprice
+      //   ) {
+      //     // All fields have values, proceed with creating
+      //     var that = this; // Controller reference variable
+
+      //     this.oModel.create("/MatSet", oData, {
+      //       success: function () {
+      //         this.oModel.create("/MattextSet", oTxtData);
+      //         sap.m.MessageToast.show("자재 등록 성공!");
+      //         oDialog.close();
+
+      //         var oView = that.getView();
+
+      //         oView.byId("idMatnum").setValue("");
+      //         oView.byId("idMattype").setSelectedKey("");
+      //         oView.byId("idMattxt").setValue("");
+      //         oView.byId("idMattxte").setValue("");
+      //         oView.byId("idUnit").setSelectedKey("");
+      //         oView.byId("idScrap").setValue("");
+      //         oView.byId("idMatper").setValue("");
+      //         oView.byId("idProdper").setValue("");
+      //         oView.byId("idStdprice").setValue("");
+      //         oView.byId("idDelflag").setSelected(false);
+      //       }.bind(this),
+      //       error: function () {
+      //         sap.m.MessageToast.show("자재 등록 오류!");
+      //       },
+      //     });
+      //   } else {
+      //     // Show an error message indicating that all fields are required
+      //     sap.m.MessageBox.error("모든 값을 입력해주세요.");
+      //   }
+      // },
 
       onSaveModDialog: function () {
         var oData = this.oModModel.getData();
@@ -196,29 +295,25 @@ sap.ui.define(
           : "";
         oData.Delflag = oDelflag;
 
-        // Perform validation
         if (this.validateFields(oData)) {
-          // Validation successful, proceed with updating
           this.oModel.update("/MatSet('" + oData.Matnum + "')", oData, {
             success: function () {
-              sap.m.MessageToast.show("수정 성공!");
+              sap.m.MessageToast.show("자재 수정 성공!");
               var oDialog = this.byId("modDialog");
               if (oDialog) {
                 oDialog.close();
               }
             }.bind(this),
             error: function () {
-              sap.m.MessageToast.show("수정 오류!");
+              sap.m.MessageToast.show("자재 수정 오류!");
             },
           });
         } else {
-          // Validation failed, show error message
           sap.m.MessageBox.error("모든 값을 입력해주세요.");
         }
       },
 
       validateFields: function (oData) {
-        // Perform validation checks on the fields
         if (
           oData.Matnum &&
           oData.Mattype &&
@@ -229,9 +324,9 @@ sap.ui.define(
           oData.Prodper &&
           oData.Stdprice
         ) {
-          return true; // All fields have values
+          return true;
         } else {
-          return false; // Some fields are missing values
+          return false;
         }
       },
 
@@ -259,21 +354,48 @@ sap.ui.define(
 
       onCloseDialog: function () {
         var oDialog = this.getView().byId("addDialog");
+        var oView = this.getView();
 
-        this.getView().byId("idMatnum").setValue("");
-        this.getView().byId("idMattype").setSelectedKey("");
-        // this.getView().byId("idLangu").setSelectedKey("");
-        this.getView().byId("idMattxt").setValue("");
-        this.getView().byId("idMattxte").setValue("");
-        this.getView().byId("idUnit").setSelectedKey("");
-        this.getView().byId("idScrap").setValue("");
-        this.getView().byId("idMatper").setValue("");
-        this.getView().byId("idProdper").setValue("");
-        this.getView().byId("idStdprice").setValue("");
-        this.getView().byId("idDelflag").setSelected(false);
+        oView.byId("idMatnum").setValue("");
+        oView.byId("idMattype").setSelectedKey("");
+        oView.byId("idMattxt").setValue("");
+        oView.byId("idMattxte").setValue("");
+        oView.byId("idUnit").setSelectedKey("");
+        oView.byId("idScrap").setValue("");
+        oView.byId("idMatper").setValue("");
+        oView.byId("idProdper").setValue("");
+        oView.byId("idStdprice").setValue("");
+        oView.byId("idDelflag").setSelected(false);
+
+        oView.byId("idMatnum").setValueState("None");
+        oView.byId("idMattype").setValueState("None");
+        oView.byId("idMattxt").setValueState("None");
+        oView.byId("idUnit").setValueState("None");
+        oView.byId("idScrap").setValueState("None");
+        oView.byId("idMatper").setValueState("None");
+        oView.byId("idProdper").setValueState("None");
+        oView.byId("idStdprice").setValueState("None");
 
         oDialog.close();
       },
+
+      // onCloseDialog: function () {
+      //   var oDialog = this.getView().byId("addDialog");
+
+      //   this.getView().byId("idMatnum").setValue("");
+      //   this.getView().byId("idMattype").setSelectedKey("");
+      //   // this.getView().byId("idLangu").setSelectedKey("");
+      //   this.getView().byId("idMattxt").setValue("");
+      //   this.getView().byId("idMattxte").setValue("");
+      //   this.getView().byId("idUnit").setSelectedKey("");
+      //   this.getView().byId("idScrap").setValue("");
+      //   this.getView().byId("idMatper").setValue("");
+      //   this.getView().byId("idProdper").setValue("");
+      //   this.getView().byId("idStdprice").setValue("");
+      //   this.getView().byId("idDelflag").setSelected(false);
+
+      //   oDialog.close();
+      // },
 
       onRowSelect: function (oEvent) {
         var oRowContext = oEvent.getParameter("rowContext");
@@ -320,7 +442,6 @@ sap.ui.define(
         var oInput = oEvent.getSource();
         var sValue = oInput.getValue();
 
-        // Validate if the input is an 8-digit number
         var regex = /^\d{8}$/;
         var bValid = regex.test(sValue);
 
@@ -331,7 +452,6 @@ sap.ui.define(
           bValid ? "" : "자재번호는 8자리 숫자로 입력해주세요."
         );
 
-        // Disable the Save button if there is a validation error
         var oDialog = this.byId("addDialog");
         var oSaveButton = oDialog.getBeginButton();
         oSaveButton.setEnabled(bValid);
@@ -351,7 +471,6 @@ sap.ui.define(
           bValid ? "" : "1자에서 40자 사이의 글자로 입력해주세요."
         );
 
-        // Disable the Save button if there is a validation error
         var oDialog = this.byId("addDialog");
         var oSaveButton = oDialog.getBeginButton();
         oSaveButton.setEnabled(bValid);
@@ -371,7 +490,6 @@ sap.ui.define(
           bValid ? "" : "1자에서 40자 사이의 글자로 입력해주세요."
         );
 
-        // Disable the Save button if there is a validation error
         var oDialog = this.byId("modDialog");
         var oSaveButton = oDialog.getBeginButton();
         oSaveButton.setEnabled(bValid);
@@ -381,7 +499,6 @@ sap.ui.define(
         var oInput = oEvent.getSource();
         var sValue = oInput.getValue();
 
-        // Validate if the input contains only English letters, numbers, special characters, and spaces
         var regex =
           /^[a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\-\_\+\=\[\]\{\}\\\|\;\:\'\"\,\.\/\?\<\>\s]+$/;
         var bValid = regex.test(sValue);
@@ -393,7 +510,6 @@ sap.ui.define(
           bValid ? "" : "영어, 숫자, 특수문자, 공백만 입력 가능합니다."
         );
 
-        // Disable the Save button if there is a validation error
         var oDialog = this.byId("addDialog");
         var oSaveButton = oDialog.getBeginButton();
         oSaveButton.setEnabled(bValid);
@@ -403,12 +519,10 @@ sap.ui.define(
         var oInput = oEvent.getSource();
         var sValue = oInput.getValue();
 
-        // Validate if the input is a number with up to 1 decimal place
         var regex = /^\d+(\.\d{0,1})?$/;
         var bValid = regex.test(sValue);
 
         if (bValid) {
-          // Validate if the value is within the range of 0 to 100
           var fValue = parseFloat(sValue);
           bValid = fValue >= 0 && fValue <= 100;
         }
@@ -422,7 +536,6 @@ sap.ui.define(
             : "숫자와 소수점 1자리까지 입력 가능하며, 최대값은 100입니다."
         );
 
-        // Disable the Save button if there is a validation error
         var oDialog = this.byId("addDialog");
         var oSaveButton = oDialog.getBeginButton();
         oSaveButton.setEnabled(bValid);
@@ -431,12 +544,10 @@ sap.ui.define(
         var oInput = oEvent.getSource();
         var sValue = oInput.getValue();
 
-        // Validate if the input is a number with up to 1 decimal place
         var regex = /^\d+(\.\d{0,1})?$/;
         var bValid = regex.test(sValue);
 
         if (bValid) {
-          // Validate if the value is within the range of 0 to 100
           var fValue = parseFloat(sValue);
           bValid = fValue >= 0 && fValue <= 100;
         }
@@ -450,7 +561,6 @@ sap.ui.define(
             : "숫자와 소수점 1자리까지 입력 가능하며, 최대값은 100입니다."
         );
 
-        // Disable the Save button if there is a validation error
         var oDialog = this.byId("modDialog");
         var oSaveButton = oDialog.getBeginButton();
         oSaveButton.setEnabled(bValid);
@@ -460,16 +570,14 @@ sap.ui.define(
         var oInput = oEvent.getSource();
         var sValue = oInput.getValue();
 
-        // Validate if the input is a positive integer greater than 0
-        var regex = /^[1-9]\d*$/;
+        var regex = /^[0-9]\d*$/;
         var bValid = regex.test(sValue);
 
         oInput.setValueState(
           bValid ? sap.ui.core.ValueState.None : sap.ui.core.ValueState.Error
         );
-        oInput.setValueStateText(bValid ? "" : "0보다 큰 정수를 입력해주세요.");
+        oInput.setValueStateText(bValid ? "" : "0이상의 정수를 입력해주세요.");
 
-        // Disable the Save button if there is a validation error
         var oDialog = this.byId("addDialog");
         var oSaveButton = oDialog.getBeginButton();
         oSaveButton.setEnabled(bValid);
@@ -479,7 +587,6 @@ sap.ui.define(
         var oInput = oEvent.getSource();
         var sValue = oInput.getValue();
 
-        // Validate if the input is a positive integer greater than 0
         var regex = /^[1-9]\d*$/;
         var bValid = regex.test(sValue);
 
@@ -488,7 +595,6 @@ sap.ui.define(
         );
         oInput.setValueStateText(bValid ? "" : "0보다 큰 정수를 입력해주세요.");
 
-        // Disable the Save button if there is a validation error
         var oDialog = this.byId("modDialog");
         var oSaveButton = oDialog.getBeginButton();
         oSaveButton.setEnabled(bValid);

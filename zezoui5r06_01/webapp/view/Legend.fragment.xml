@@ -6,6 +6,7 @@
         id="legendPopover"
         title="Legend"
         placement="Bottom"
+        contentWidth="135px"
         showHeader="false">
         <PlanningCalendarLegend
             standardItems="Today,Selected"

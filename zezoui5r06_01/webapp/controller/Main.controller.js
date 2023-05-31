@@ -53,19 +53,19 @@ sap.ui.define(
                   item.icon = "sap-icon://compare";
                 } else if (item.Wccode === "1002") {
                   item.type = "Type05";
-                  item.icon = "sap-icon://paint-bucket";
+                  item.icon = "sap-icon://add-equipment";
                 } else if (item.Wccode === "1003") {
                   item.type = "Type08";
-                  item.icon = "ap-icon://factory";
+                  item.icon = "sap-icon://supplier";
                 } else if (item.Wccode === "1004") {
                   item.type = "Type09";
-                  item.icon = "sap-icon://factory";
+                  item.icon = "sap-icon://supplier";
                 } else if (item.Wccode === "1005") {
                   item.type = "Type06";
-                  item.icon = "sap-icon://factory";
+                  item.icon = "sap-icon://supplier";
                 } else {
                   item.type = "Type02";
-                  item.icon = "sap-icon://supplier";
+                  item.icon = "sap-icon://factory";
                 }
 
                 // item.icon = "sap-icon://legend";
@@ -85,23 +85,23 @@ sap.ui.define(
           appointments: [],
           supportedAppointmentItems: [
             {
-              text: "1F-Weighing Room",
+              text: "1F-칭량실",
               type: CalendarDayType.Type01,
             },
             {
-              text: "1F-Manufacturing Room",
+              text: "1F-제조실",
               type: CalendarDayType.Type05,
             },
             {
-              text: "1F-Filling/Assembly Room1",
+              text: "1F-충포장실1",
               type: CalendarDayType.Type08,
             },
             {
-              text: "1F-Filling/Assembly Room2",
+              text: "1F-충포장실2",
               type: CalendarDayType.Type09,
             },
             {
-              text: "1F-Filling/Assembly Room3",
+              text: "1F-충포장실3",
               type: CalendarDayType.Type06,
             },
           ],
@@ -367,16 +367,43 @@ sap.ui.define(
       //     oResponsivePopover.openBy(oAppointment);
       //   });
       // },
+      // handleMoreLinkPress: function (oEvent) {
+      //   var oLink = oEvent.getParameter("moreLink");
+      //   var oAppointment = oEvent.getParameter("appointment");
+
+      //   // 선택한 일자 가져오기
+      //   var selectedDate = oAppointment.getStartDate();
+
+      //   // DayView로 이동하고 선택한 일자 지정
+      //   this.navigateToDayView(selectedDate);
+      // },
+
+      // navigateToDayView: function (selectedDate) {
+      //   // DayView로 이동하고 선택한 일자 지정
+      //   var oSPC = this.byId("SPC1"); // SinglePlanningCalendar 컨트롤 가져오기
+      //   oSPC.setViewKey("DayView"); // DayView로 뷰 변경
+      //   oSPC.setStartDate(selectedDate); // 선택한 일자로 시작일 지정
+      // },
 
       handleMoreLinkPress: function (oEvent) {
-        var oDate = oEvent.getParameter("date"),
-          oSinglePlanningCalendar = this.getView().byId("SPC1");
+        var oDate = oEvent.getParameter("date");
+        var oSinglePlanningCalendar = this.getView().byId("SPC1");
 
         oSinglePlanningCalendar.setSelectedView(
           oSinglePlanningCalendar.getViews()[2]
         ); // DayView
+        oSinglePlanningCalendar.setStartDate(oDate);
 
-        this.getView().getModel().setData({ startDate: oDate }, true);
+        // DayView로 이동한 후 선택한 날짜를 확인하기 위한 로그
+        console.log("Selected Date:", oSinglePlanningCalendar.getStartDate());
+        // var oDate = oEvent.getParameter("date"),
+        //   oSinglePlanningCalendar = this.getView().byId("SPC1");
+
+        // oSinglePlanningCalendar.setSelectedView(
+        //   oSinglePlanningCalendar.getViews()[2]
+        // ); // DayView
+
+        // this.getView().getModel().setData({ startDate: oDate }, true);
       },
       onCloseButtonPress: function () {
         var oDetailsPopover = this.byId("detailsPopover");
@@ -497,6 +524,7 @@ sap.ui.define(
           width: "auto",
         });
       },
+
       handleSelectionFinish: function (oEvent) {
         var bbb = oEvent.getSource().getSelectedKeys();
         var aFilter = [];

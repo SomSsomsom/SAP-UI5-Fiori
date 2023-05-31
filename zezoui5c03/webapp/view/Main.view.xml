@@ -54,7 +54,7 @@
 
                         <m:Button
                             icon="sap-icon://search"
-                            text="Search"
+                            text="조회"
                             press="onSearchPress" />
 
                     </m:OverflowToolbar>
@@ -64,12 +64,12 @@
 
                         <m:Button
                             icon="sap-icon://add-product"
-                            text="Create"
+                            text="등록"
                             press="onCreatePress" />
 
                         <m:Button
                             icon="sap-icon://edit"
-                            text="Modify"
+                            text="수정"
                             press="onModifyPress" />
 
                         <!-- <m:Button

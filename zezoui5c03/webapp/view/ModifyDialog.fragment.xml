@@ -57,6 +57,7 @@
                 <m:Label text="자재명" labelFor="idMattxt1" />
                 <m:Input
                     value="{mod>/Mattxt}"
+                    width="18rem"
                     id="idMattxt1"
                     class="sapUiSmallMarginBottom"
                     type="Text"
@@ -137,11 +138,11 @@
 
         </m:content>
         <m:beginButton>
-            <m:Button text="Save" press="onSaveModDialog" type="Emphasized" />
+            <m:Button text="저장" press="onSaveModDialog" type="Emphasized" />
         </m:beginButton>
         <m:endButton>
 
-            <m:Button text="close" press="onCloseModDialog" />
+            <m:Button text="닫기" press="onCloseModDialog" />
         </m:endButton>
 
     </m:Dialog>

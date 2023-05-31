@@ -61,6 +61,7 @@
                 <m:Label text="자재명 (국문)" labelFor="idMattxt" />
                 <m:Input
                     value="{main>/Mattxt}"
+                    width="17rem"
                     id="idMattxt"
                     class="sapUiSmallMarginBottom"
                     type="Text"
@@ -72,6 +73,7 @@
                 <m:Label text="자재명 (영문)" labelFor="idMattxte" />
                 <m:Input
                     value="{txt>/Mattxt}"
+                    width="17rem"
                     id="idMattxte"
                     class="sapUiSmallMarginBottom"
                     type="Text"
@@ -149,11 +151,11 @@
 
         </m:content>
         <m:beginButton>
-            <m:Button text="Save" press="onSaveDialog" type="Emphasized" />
+            <m:Button text="저장" press="onSaveDialog" type="Emphasized" />
         </m:beginButton>
         <m:endButton>
 
-            <m:Button text="close" press="onCloseDialog" />
+            <m:Button text="닫기" press="onCloseDialog" />
         </m:endButton>
 
     </m:Dialog>
