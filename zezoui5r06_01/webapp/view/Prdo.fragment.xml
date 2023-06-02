@@ -28,6 +28,12 @@
             <Label text="순번" labelFor="Itemnum" class="customLabel1" />
             <Text text="{sch_j>/Popover/Itemnum}" />
 
+            <Label text="자재유형" labelFor="Mattypetxt" class="customLabel1" />
+            <Text text="{sch_j>/Popover/Mattypetxt}" />
+
+            <Label text="자재명" labelFor="Mattxt" class="customLabel1" />
+            <Text text="[{sch_j>/Popover/Matnum}]  {sch_j>/Popover/Mattxt}" />
+
             <Label text="생산요청번호" labelFor="Prnum" class="customLabel1" />
             <Text text="{sch_j>/Popover/Prnum}" />
 

@@ -12,6 +12,7 @@
                 enableCellFilter="true"
                 rowSelectionChange="onRowSelect"
                 enableSelectAll="false"
+                alternateRowColors="true"
                 ariaLabelledBy="title" rows="{path: '/MatSet'}">
                 <extension>
                     <m:OverflowToolbar style="Clear">
